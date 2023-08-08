@@ -247,7 +247,7 @@ class Gateway {
 		}
 
 		if ('hostedUrl' in request) {
-			requestSetting['hostedUrl'] = request['hostedUrl'];
+			requestSettings['hostedUrl'] = request['hostedUrl'];
 			delete (request['hostedUrl']);
 		} else {
 			requestSettings['hostedUrl'] = this.hostedUrl;
