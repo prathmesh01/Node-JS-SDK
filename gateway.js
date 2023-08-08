@@ -506,7 +506,7 @@ class Gateway {
  * @return	string					HTML containing <INPUT> tags
  */
 function fieldToHtml(name, value) {
-	ret = '';
+	let ret = '';
 	if (typeof value === "object" && !Array.isArray(value)) {
 		Object.entries(value).forEach(([nestedKey, nestedValue]) => {
 			ret += fieldToHtml(`${name}[${nestedKey}]`, nestedValue);
