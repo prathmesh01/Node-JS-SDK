@@ -464,7 +464,7 @@ class Gateway {
 			}
 		}
 
-		ret = `
+		let ret = `
 			<form ${form_attrs}>
 			${form_fields}
 			</form>
@@ -506,7 +506,7 @@ class Gateway {
  * @return	string					HTML containing <INPUT> tags
  */
 function fieldToHtml(name, value) {
-	let ret = '';
+	ret = '';
 	if (typeof value === "object" && !Array.isArray(value)) {
 		Object.entries(value).forEach(([nestedKey, nestedValue]) => {
 			ret += fieldToHtml(`${name}[${nestedKey}]`, nestedValue);
@@ -538,15 +538,17 @@ function htmlentities(str) {
 	if (typeof str == 'number') {
 		return str.toString();
 	}
-
+  if (typeof str == 'string') {
 	return str.replace(/[&<>'"]/g,
-	tag => ({
-		'&': '&amp;',
-		'<': '&lt;',
-		'>': '&gt;',
-		"'": '&#39;',
-		'"': '&quot;'
-	}[tag]));
+    tag => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[tag]));
+  }
+  return str
 }
 
 /**
@@ -565,8 +567,8 @@ function phpCompatibleSort(a, b) {
 
 	do {
 		// codePointAt helpfully returns undefined if pos > length
-		achr = a.codePointAt(pos);
-		bchr = b.codePointAt(pos);
+		let achr = a.codePointAt(pos);
+		let bchr = b.codePointAt(pos);
 
 		if (achr == undefined) {  //We don't need to check b at all.
 			return -1
