@@ -528,9 +528,12 @@ function fieldToHtml(name, value) {
  * (0x00 to 0x1f consists of whitespace and control characters)
  */
 function ordEntities(str) {
-	return str.replace(/[(\x00-\x1f)]/g,
-		match => { return '&#' + match.codePointAt(0) + ';';
-	});
+	if (typeof str == 'string') {
+		return str.replace(/[(\x00-\x1f)]/g,
+			match => { return '&#' + match.codePointAt(0) + ';';
+		});
+	}
+	return str;
 }
 
 // https://stackoverflow.com/a/57448862
@@ -538,17 +541,17 @@ function htmlentities(str) {
 	if (typeof str == 'number') {
 		return str.toString();
 	}
-  if (typeof str == 'string') {
-	return str.replace(/[&<>'"]/g,
-    tag => ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      "'": '&#39;',
-      '"': '&quot;'
-    }[tag]));
-  }
-  return str
+	if (typeof str == 'string') {
+		return str.replace(/[&<>'"]/g,
+		tag => ({
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		"'": '&#39;',
+		'"': '&quot;'
+		}[tag]));
+	}
+	return str;
 }
 
 /**
