@@ -391,7 +391,7 @@ class Gateway {
 		hash.update(body);
 		hash.update(secret);
 
-		return hash.digest('hex') + '|' + partial;
+		return hash.digest('hex');
 	}
 
 	/**
